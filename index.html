@@ -110,7 +110,7 @@ h2{font-size:30px;letter-spacing:-.025em;line-height:1.2;font-weight:700;color:v
 .card p{font-size:14px;line-height:1.55}
 
 /* terminal */
-.term{background:#0e1517;border:1px solid #1f2d30;border-radius:14px;overflow:hidden;margin-bottom:56px;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;
+.term{background:#0e1517;border:1px solid #1f2d30;border-radius:14px;overflow:hidden;margin:40px 0 0;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;
   box-shadow:0 20px 44px -24px rgba(0,0,0,.55),0 0 0 1px rgba(45,212,191,.04)}
 .term-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid #1f2d30}
 .term-bar i{width:10px;height:10px;border-radius:50%;background:#26343a}
@@ -290,18 +290,6 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
 
 <!-- =============== RIGHT (scrolls) =============== -->
 <main>
-  <div class="term" aria-hidden="true">
-    <div class="term-bar"><i></i><i></i><i></i><span>~/vasileios</span></div>
-    <div class="term-body" id="term">
-      <div class="ln"><span class="p">$</span> <b>whoami</b></div>
-      <div class="ln o">vasileios.tripolidis — IT Administrator</div>
-      <div class="ln"><span class="p">$</span> <b>cat focus.txt</b></div>
-      <div class="ln o">infrastructure · networking · security · support</div>
-      <div class="ln"><span class="p">$</span> <b>systemctl status uptime</b></div>
-      <div class="ln v">● active (running)</div>
-      <div class="ln"><span class="p">$</span> <span class="cursor"></span></div>
-    </div>
-  </div>
 
   <!-- ABOUT -->
   <section id="about" class="about">
@@ -467,6 +455,18 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
         <div class="tags"><span class="tag">Facebook Ads</span><span class="tag">Social Media</span><span class="tag">Photoshop</span><span class="tag">Video Editing</span></div></div>
     </div>
     
+    <div class="term reveal" aria-hidden="true">
+      <div class="term-bar"><i></i><i></i><i></i><span>~/vasileios</span></div>
+      <div class="term-body" id="term">
+        <div class="ln"><span class="p">$</span> <b>whoami</b></div>
+        <div class="ln o">vasileios.tripolidis — IT Administrator</div>
+        <div class="ln"><span class="p">$</span> <b>cat focus.txt</b></div>
+        <div class="ln o">infrastructure · networking · security · support</div>
+        <div class="ln"><span class="p">$</span> <b>systemctl status uptime</b></div>
+        <div class="ln v">● active (running)</div>
+        <div class="ln"><span class="p">$</span> <span class="cursor"></span></div>
+      </div>
+    </div>
     <div class="sub-h reveal"><span lang="el">Πέρα από το IT</span><span lang="en">Beyond IT</span></div>
     <div class="cards beyond">
       <div class="card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
@@ -522,11 +522,14 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
     try{localStorage.setItem('theme',next);}catch(e){}
   });
 
-  // Terminal: reveal lines one by one
+  // Terminal: type lines one by one when it scrolls into view
   (function(){
-    var ls=[].slice.call(document.querySelectorAll('#term .ln'));
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches){ls.forEach(function(l){l.classList.add('on');});return;}
-    var t=200; ls.forEach(function(l,i){ t+= (i%2? 260 : 480); setTimeout(function(){l.classList.add('on');}, t); });
+    var box=document.getElementById('term'); if(!box) return;
+    var ls=[].slice.call(box.querySelectorAll('.ln'));
+    function run(){ var t=100; ls.forEach(function(l,i){ t+=(i%2?260:480); setTimeout(function(){l.classList.add('on');},t); }); }
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)){ls.forEach(function(l){l.classList.add('on');});return;}
+    var o=new IntersectionObserver(function(es){ if(es[0].isIntersecting){ o.disconnect(); run(); } },{threshold:.4});
+    o.observe(box);
   })();
 
   // Back to top
