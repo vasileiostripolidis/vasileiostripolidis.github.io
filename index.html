@@ -102,12 +102,6 @@ section{margin-bottom:104px;scroll-margin-top:56px}
 h2{font-size:30px;letter-spacing:-.025em;line-height:1.2;font-weight:700;color:var(--text);margin-bottom:24px}
 .about p{margin-bottom:14px}
 
-.principles{display:flex;flex-direction:column;gap:10px;margin-top:6px}
-.pr{display:flex;gap:18px;align-items:flex-start;padding:18px 20px;background:var(--panel);border:1px solid var(--line);border-radius:14px;transition:border-color .2s,transform .2s}
-.pr:hover{border-color:color-mix(in srgb,var(--accent) 40%,var(--line));transform:translateX(3px)}
-.pr-n{flex:none;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:14px;font-weight:500;color:var(--accent);padding-top:2px}
-.pr h3{font-size:16px;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:4px}
-.about .pr p{font-size:14.5px;line-height:1.6;margin:0}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 40px}
 .stat{display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
 .stat b{display:block;font-size:26px;letter-spacing:-.03em;line-height:1;color:var(--accent);font-weight:700;margin-bottom:8px}
@@ -225,11 +219,6 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
 .totop{display:inline-flex;align-items:center;gap:6px;background:none;border:1px solid var(--line);color:var(--muted);padding:8px 14px;border-radius:999px;font:500 13.5px Inter,sans-serif;cursor:pointer;transition:color .2s,border-color .2s}
 .totop:hover{color:var(--accent);border-color:var(--accent)}
 .totop svg{width:15px;height:15px}
-.fab{position:fixed;right:24px;bottom:24px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--text);
-  display:grid;place-items:center;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s,color .2s;box-shadow:var(--shadow);z-index:40}
-.fab.show{opacity:1;pointer-events:auto;transform:none}
-.fab:hover{color:var(--accent)}
-.fab svg{width:18px;height:18px}
 
 .reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
@@ -259,7 +248,6 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
   .entry:hover{background:none;box-shadow:none}
   .list:hover .entry{opacity:1}
   .contact-box{padding:28px 22px}
-  .fab{right:16px;bottom:16px}
 }
 </style>
 <script>
@@ -321,23 +309,14 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
     <div class="eyebrow reveal"><span lang="el">Σχετικά με εμένα</span><span lang="en">About me</span></div>
     <h2 class="reveal"><span lang="el">Λίγα λόγια για μένα.</span><span lang="en">A bit about me.</span></h2>
     <div class="reveal">
-      <p lang="el">Με την τεχνολογία κόλλησα επειδή δεν μένει ποτέ ίδια. Συνέχεια βγαίνει κάτι καινούργιο, και μου αρέσει να το δοκιμάζω για να δω αν κάνει τη δουλειά μας πιο εύκολη ή πιο ασφαλή.</p>
-      <p lang="en">I got into tech because it never stays the same. There's always something new, and I like trying it out to see if it makes our work easier or safer.</p>
+      <p lang="el">Με την τεχνολογία κόλλησα επειδή δεν μένει ποτέ ίδια. Συνέχεια εμφανίζεται κάτι καινούργιο, και μου αρέσει να το δοκιμάζω για να δω αν κάνει τη δουλειά μου πιο εύκολη ή πιο ασφαλή.</p>
+      <p lang="en">I got into tech because it never stays the same. There's always something new, and I like trying it out to see if it makes my work easier or safer.</p>
       <p lang="el">Αποφοίτησα από το Τμήμα <strong>Μηχανικών Η/Υ και Πληροφορικής</strong> του Πανεπιστημίου Πατρών, αλλά μέχρι να φτάσω στο IT πέρασα από αρκετές δουλειές: back office, e-shop, social media, και ενάμιση χρόνο ως υπεύθυνος καταστήματος. Εκεί είδα από κοντά πώς δουλεύει μια επιχείρηση στην καθημερινότητα και τι χρειάζονται στην πράξη οι άνθρωποί της από το IT.</p>
       <p lang="en">I graduated in <strong>Computer Engineering &amp; Informatics</strong> from the University of Patras, but I took a few detours before landing in IT: back office, e-shops, social media, and a year and a half running a retail store. That's where I saw how a business actually works day to day, and what its people really need from IT.</p>
-      <p lang="el">Από τον Νοέμβριο του 2025 είμαι <strong>IT Administrator</strong> στη <a href="https://zefxis.net/" target="_blank" rel="noopener"><strong>Ζεύξις TEL</strong></a>. Έχω την ευθύνη για το δίκτυο, τους servers, το ERP, την ασφάλεια και τα backups. Με λίγα λόγια, είμαι αυτός που παίρνουν τηλέφωνο οι 80 και κάτι συνάδελφοι όταν κάτι δεν δουλεύει.</p>
-      <p lang="en">Since November 2025 I've been the <strong>IT Administrator</strong> at <a href="https://zefxis.net/" target="_blank" rel="noopener"><strong>Zefxis TEL</strong></a>. I look after the network, servers, ERP, security and backups. In short, I'm the one 80-odd colleagues call when something stops working.</p>
+      <p lang="el">Από τον Νοέμβριο του 2025 είμαι <strong>IT Administrator</strong> στη <a href="https://zefxis.net/" target="_blank" rel="noopener"><strong>Ζεύξις TEL</strong></a>. Έχω την ευθύνη για το δίκτυο, τους servers, το ERP, την ασφάλεια και τα backups. Παράλληλα, είμαι το σημείο αναφοράς για κάθε τεχνικό ζήτημα των περισσότερων από 80 συναδέλφων μου, σε όλα τα τμήματα της εταιρείας.</p>
+      <p lang="en">Since November 2025 I've been the <strong>IT Administrator</strong> at <a href="https://zefxis.net/" target="_blank" rel="noopener"><strong>Zefxis TEL</strong></a>. I look after the network, servers, ERP, security and backups. I'm also the first point of contact for technical issues for more than 80 colleagues across every department.</p>
     </div>
 
-    <div class="eyebrow reveal" style="margin-top:40px"><span lang="el">Πώς δουλεύω</span><span lang="en">How I work</span></div>
-    <div class="principles">
-      <div class="pr reveal"><span class="pr-n">01</span><div><h3><span lang="el">Μιλάω απλά</span><span lang="en">Plain language</span></h3>
-        <p><span lang="el">Αν με ρωτήσεις τι έγινε, θα σου το πω χωρίς ορολογίες. Θέλω να καταλάβεις τι χάλασε και γιατί, ώστε την επόμενη φορά ίσως να μη χρειαστεί να με πάρεις τηλέφωνο.</span><span lang="en">If you ask me what happened, you'll get an answer without the jargon. I want you to understand what broke and why, so next time you might not need to call me.</span></p></div></div>
-      <div class="pr reveal"><span class="pr-n">02</span><div><h3><span lang="el">Κλείνω ό,τι ανοίγω</span><span lang="en">I finish what I start</span></h3>
-        <p><span lang="el">Όταν κάτι χαλάσει, δεν με απασχολεί ποιος φταίει. Το φτιάχνω, σημειώνω τι έγινε και κοιτάζω πώς θα το αποφύγουμε την επόμενη φορά.</span><span lang="en">When something breaks, I don't care whose fault it was. I fix it, write down what happened and figure out how we avoid it next time.</span></p></div></div>
-      <div class="pr reveal"><span class="pr-n">03</span><div><h3><span lang="el">Μαθαίνω συνέχεια</span><span lang="en">Always learning</span></h3>
-        <p><span lang="el">Διαβάζω, δοκιμάζω καινούργια εργαλεία και κρατάω όσα πραγματικά μας γλιτώνουν χρόνο.</span><span lang="en">I read, try out new tools and keep the ones that actually save us time.</span></p></div></div>
-    </div>
 
     <div class="eyebrow reveal" style="margin-top:48px"><span lang="el">Με μια ματιά</span><span lang="en">At a glance</span></div>
     <div class="stats">
@@ -552,9 +531,6 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
 </main>
 </div>
 
-<button class="fab" id="fab" type="button" data-top aria-label="Back to top">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
-</button>
 
 <script>
 (function(){
@@ -591,9 +567,6 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
       if(history.replaceState) history.replaceState(null,'',location.pathname+location.search);
     });
   });
-  var fab=document.getElementById('fab');
-  function onScroll(){fab.classList.toggle('show',window.scrollY>600);}
-  addEventListener('scroll',onScroll,{passive:true}); onScroll();
 
   // Active nav link
   var links=[].slice.call(document.querySelectorAll('#nav a'));
