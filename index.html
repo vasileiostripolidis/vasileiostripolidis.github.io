@@ -132,6 +132,14 @@ h2{font-size:30px;letter-spacing:-.025em;line-height:1.2;font-weight:700;color:v
 @media (max-width:640px){.term{font-size:12px}.term-body{padding:12px 14px}}
 
 /* experience entries */
+#xp-list{transition:max-height .6s ease}
+#xp-list.collapsed{overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 160px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 160px),transparent)}
+.xp-toggle{margin-top:14px}
+.xp-toggle .xp-close{display:none}
+.xp-toggle[aria-expanded="true"] .xp-open{display:none}
+.xp-toggle[aria-expanded="true"] .xp-close{display:inline}
+.xp-toggle:hover svg{transform:none}
+.xp-toggle[aria-expanded="true"] svg{transform:rotate(180deg)}
 .list{display:flex;flex-direction:column;gap:6px}
 .list:hover .entry{opacity:.55}
 .list .entry:hover{opacity:1}
@@ -306,7 +314,7 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
   <!-- ABOUT -->
   <section id="about" class="about">
     <div class="eyebrow reveal"><span lang="el">Σχετικά με εμένα</span><span lang="en">About me</span></div>
-    <h2 class="reveal"><span lang="el">Η διαδρομή μου.</span><span lang="en">My path so far.</span></h2>
+    <h2 class="reveal"><span lang="el">Ποιος είμαι.</span><span lang="en">Who I am.</span></h2>
     <div class="reveal">
       <p lang="el">Με την τεχνολογία κόλλησα επειδή δεν μένει ποτέ ίδια. Συνέχεια εμφανίζεται κάτι καινούργιο, και μου αρέσει να το δοκιμάζω για να δω αν κάνει τη δουλειά μου πιο εύκολη ή πιο ασφαλή.</p>
       <p lang="en">I got into tech because it never stays the same. There's always something new, and I like trying it out to see if it makes my work easier or safer.</p>
@@ -352,7 +360,7 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
   <section id="experience">
     <div class="eyebrow reveal"><span lang="el">Εμπειρία</span><span lang="en">Experience</span></div>
     <h2 class="reveal"><span lang="el">Επαγγελματική πορεία</span><span lang="en">Career path</span></h2>
-    <div class="list">
+    <div class="list" id="xp-list">
       <div class="entry reveal">
         <div class="when">11/2025 — <span lang="el">Σήμερα</span><span lang="en">Now</span></div>
         <div>
@@ -431,6 +439,10 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
         </div>
       </div>
     </div>
+    <button class="more xp-toggle" id="xp-toggle" type="button" aria-expanded="false" aria-controls="xp-list" hidden>
+      <span class="xp-open"><span lang="el">Δες όλη την πορεία</span><span lang="en">Show full history</span></span><span class="xp-close"><span lang="el">Λιγότερα</span><span lang="en">Show less</span></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
     
   </section>
 
@@ -483,11 +495,11 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
       <div class="term-bar"><i></i><i></i><i></i><span>~/vasileios</span></div>
       <div class="term-body" id="term">
         <div class="ln"><span class="p">$</span> <b>whoami</b></div>
-        <div class="ln o">vasileios.tripolidis — IT Administrator</div>
+        <div class="ln o">vasileios</div>
         <div class="ln"><span class="p">$</span> <b>cat focus.txt</b></div>
         <div class="ln o">infrastructure · networking · security · support</div>
-        <div class="ln"><span class="p">$</span> <b>systemctl status uptime</b></div>
-        <div class="ln v">● active (running)</div>
+        <div class="ln"><span class="p">$</span> <b>uptime -p</b></div>
+        <div class="ln v">up 5 years</div>
         <div class="ln"><span class="p">$</span> <span class="cursor"></span></div>
       </div>
     </div>
@@ -548,6 +560,26 @@ footer{padding:24px 0 64px;font-size:13.5px;color:var(--faint);display:flex;just
     root.setAttribute('data-theme',next);
     try{localStorage.setItem('theme',next);}catch(e){}
   });
+
+  // Experience: show the latest roles, fade the rest
+  (function(){
+    var list=document.getElementById('xp-list'), btn=document.getElementById('xp-toggle');
+    if(!list||!btn) return;
+    var items=list.querySelectorAll(':scope > .entry');
+    if(items.length<3) return;
+    function cut(){ return items[2].offsetTop - list.offsetTop + 140; }
+    function collapse(){ list.style.maxHeight=cut()+'px'; list.classList.add('collapsed'); btn.setAttribute('aria-expanded','false'); }
+    function expand(){ list.style.maxHeight=list.scrollHeight+'px'; list.classList.remove('collapsed'); btn.setAttribute('aria-expanded','true');
+      setTimeout(function(){ if(btn.getAttribute('aria-expanded')==='true') list.style.maxHeight='none'; },650); }
+    btn.hidden=false; collapse();
+    btn.addEventListener('click',function(){
+      if(btn.getAttribute('aria-expanded')==='true'){
+        list.style.maxHeight=list.scrollHeight+'px'; list.offsetHeight; collapse();
+        var y=list.getBoundingClientRect().top+window.scrollY-80; if(window.scrollY>y) window.scrollTo({top:y,behavior:'smooth'});
+      } else expand();
+    });
+    addEventListener('resize',function(){ if(btn.getAttribute('aria-expanded')==='false') list.style.maxHeight=cut()+'px'; });
+  })();
 
   // Terminal: type lines one by one when it scrolls into view
   (function(){
